@@ -1,7 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+
+public enum GameMode
+{
+    Cube = 0,
+    Ship = 1
+}
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +18,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform rightSide;
     [SerializeField] private LayerMask groundLayermask;
     [SerializeField] private Transform sprite;
+
+    public GameMode gameMode = GameMode.Cube;
+
+    public bool IsOnGround { get { return IsOnGroundLeftSide() || IsOnGroundRightSide(); } }
 
     private Rigidbody2D rb;
     private bool isRotationCorrected = false;
@@ -25,9 +35,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        // MoveRight();
+        MoveRight();
 
-        if (OnGroundLeftSide() || OnGroundRightSide())
+        Invoke(gameMode.ToString(), 0);
+    }
+
+    private void Cube()
+    {
+        if (IsOnGroundLeftSide() || IsOnGroundRightSide())
         {
             if (!isRotationCorrected)
             {
@@ -45,7 +60,20 @@ public class PlayerMovement : MonoBehaviour
         {
             sprite.Rotate(rotateSpeed * Time.deltaTime * Vector3.back);
         }
+    }
 
+    private void Ship()
+    {
+        sprite.rotation = Quaternion.Euler(0, 0, rb.velocity.y);
+
+        if (Input.GetMouseButton(0) && rb.gravityScale > 0)
+        {
+            rb.gravityScale = -rb.gravityScale;
+        }
+        else if(!Input.GetMouseButton(0) && rb.gravityScale < 0)
+        {
+            rb.gravityScale = Mathf.Abs(rb.gravityScale);
+        }
     }
 
     private void MoveRight()
@@ -69,17 +97,19 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
     }
 
-    private bool OnGroundLeftSide()
+    private bool IsOnGroundLeftSide()
     {
         // Returns true if there is a hit false otherwise. This is used to detect collisions.
         RaycastHit2D hit = Physics2D.Raycast(leftSide.position, Vector2.down, groundDetectionDistance, groundLayermask);
         return hit.collider != null;
     }
 
-    private bool OnGroundRightSide()
+    private bool IsOnGroundRightSide()
     {
         // Returns true if there is a hit false otherwise. This is used to detect collisions.
         RaycastHit2D hit = Physics2D.Raycast(rightSide.position, Vector2.down, groundDetectionDistance, groundLayermask);
         return hit.collider != null;
     }
+
+
 }
