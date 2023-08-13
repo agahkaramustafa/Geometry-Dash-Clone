@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     public bool IsOnGround { get { return IsOnGroundLeftSide() || IsOnGroundRightSide(); } }
 
     private Rigidbody2D rb;
-    private bool isRotationCorrected = false;
 
     private readonly float groundDetectionDistance = 0.2f;
 
@@ -44,16 +43,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsOnGroundLeftSide() || IsOnGroundRightSide())
         {
-            if (!isRotationCorrected)
-            {
-                CorrectSpriteRotation();
-                //isRotationCorrected = true;
-            }
+            CorrectSpriteRotation();
 
             if (Input.GetMouseButtonDown(0))
             {
                 Jump();
-                //isRotationCorrected = false;
             }
         }
         else

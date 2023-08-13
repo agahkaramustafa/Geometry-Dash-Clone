@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private Canvas menuCanvas;
+    [SerializeField] private Canvas winGameCanvas;
+
     public static GameManager Instance {get; private set;}
 
     private void Awake()
@@ -20,12 +23,22 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
     }
 
     public void StartGame()
     {
         // Load the game scene when the start button is pressed in the main menu scene
+        menuCanvas.enabled = false;
+        winGameCanvas.enabled = false;
         int gameSceneIndex = 1;
         SceneManager.LoadScene(gameSceneIndex);
+    }
+
+    public void ReturnMainMenu()
+    {
+        SceneManager.LoadScene(0);
+        menuCanvas.enabled = true;
+        winGameCanvas.enabled = false;
     }
 }

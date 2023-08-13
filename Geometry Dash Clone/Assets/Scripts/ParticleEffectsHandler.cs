@@ -46,4 +46,9 @@ public class ParticleEffectsHandler : MonoBehaviour
     {
         trailParticleSystem.Stop();
     }
+
+    public void PlayDeathParticleSystem()
+    {
+        deathParticleSystem.Play();
+    }
 }

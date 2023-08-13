@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 119675761
+    locked: 0
+  - name: Boundary
+    uniqueID: 3163073901
+    locked: 0
+  - name: Ground
+    uniqueID: 2375984509
+    locked: 0
+  - name: Obstacles
+    uniqueID: 1952690903
+    locked: 0
+  - name: Player
+    uniqueID: 3226177287
+    locked: 0
