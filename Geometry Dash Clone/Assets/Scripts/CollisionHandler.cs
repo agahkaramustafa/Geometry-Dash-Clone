@@ -16,10 +16,12 @@ public class CollisionHandler : MonoBehaviour
     private readonly float groundDetectionDistance = 0.6f;
     private readonly WaitForSeconds restartDelay = new WaitForSeconds(2f);
 
+    /// Checks to see if we are touching obstacles. If so we call OnPlayerDeath
     private void Update()
     {
         if(IsTouchingObstacle() || IsTouchingHorizontal())
         {
+            /// This method will be called when the player death event is not triggered.
             if (!deathEventTriggered)
             {
                 OnPlayerDeath.Invoke();
