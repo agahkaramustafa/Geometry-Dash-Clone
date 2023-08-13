@@ -16,11 +16,6 @@ public class CollisionHandler : MonoBehaviour
     private readonly float groundDetectionDistance = 0.6f;
     private readonly WaitForSeconds restartDelay = new WaitForSeconds(2f);
 
-    private void Start()
-    {
-        gameManager = FindObjectOfType<GameManager>();
-    }
-
     private void Update()
     {
         if(IsTouchingObstacle() || IsTouchingHorizontal())
@@ -48,6 +43,6 @@ public class CollisionHandler : MonoBehaviour
     IEnumerator RestartScene()
     {
         yield return restartDelay;
-        gameManager.StartGame();
+        FindObjectOfType<GameManager>().StartGame();
     }
 }

@@ -9815,7 +9815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 11
   jumpForce: 16
-  rotateSpeed: 200
+  rotateSpeed: 400
   leftSide: {fileID: 741767514190035492}
   rightSide: {fileID: 140216502446172395}
   groundLayermask:
@@ -9979,7 +9979,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1068790009
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
